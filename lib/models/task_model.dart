@@ -13,22 +13,21 @@ class Task {
     required this.userId,
   });
 
-  // Create a Task from a JSON map
+
   factory Task.fromJson(Map<String, dynamic> json) {
     return Task(
       id: json['id'],
-      taskName: json['task_name'], // Ensure this matches the column name
+      taskName: json['task_name'],
       date: DateTime.parse(json['date']),
       isCompleted: json['is_completed'],
       userId: json['user_id'],
     );
   }
 
-  // Convert Task to JSON format
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'task_name': taskName, // Ensure this matches the column name
+      'task_name': taskName, 
       'date': date.toIso8601String(),
       'is_completed': isCompleted,
       'user_id': userId,
