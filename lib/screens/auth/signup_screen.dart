@@ -24,8 +24,9 @@ class SignupScreen extends StatelessWidget {
         body: BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccess) {
-              Navigator.of(context).pushReplacement(
+              Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => LoginScreen()),
+                (route) => false,
               );
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
