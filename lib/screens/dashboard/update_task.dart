@@ -44,8 +44,7 @@ class _UpdateTaskDialogState extends State<UpdateTaskDialog> {
         _selectedDate = picked;
       });
     }
-  }
-
+  } 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(

@@ -1,5 +1,6 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:task_app/screens/dashboard/update_task.dart';
 import 'package:task_app/services/task_service.dart';
 import 'package:task_app/models/task_model.dart';
 import 'package:task_app/utils/app_colors.dart';
@@ -31,6 +32,25 @@ class _CalendarScreenState extends State<CalendarScreen> {
       _tasks = tasks;
       _isLoading = false;
     });
+  }
+  
+  Future<void> _showUpdateTaskDialog(Task task) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return UpdateTaskDialog(
+          task: task,
+          onTaskUpdated: (taskName, selectedDate) async {
+            final updatedTask = task.copyWith(
+              taskName: taskName,
+              date: selectedDate,
+            );
+            await _taskService.updateTask(updatedTask);
+            _loadTasks();
+          },
+        );
+      },
+    );
   }
 
   Future<void> _deleteTask(String taskId) async {
@@ -102,13 +122,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                     _deleteTask(task.id);
                                   },
                                   onEdit: () {
-                                    // Optional: handle edit
+                                    _showUpdateTaskDialog(task);
                                   },
                                   onChecked: (value) {
                                     _toggleTaskCompletion(task, value);
                                   },
                                 );
-                              },
+                              }, 
                             ),
                           ),
                 ),
