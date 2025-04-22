@@ -24,11 +24,11 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 2));
 
     if (user != null) {
-      // User is logged in, navigate to Home Screen
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      );
+      Navigator.of(context).pushAndRemoveUntil(
+  MaterialPageRoute(builder: (context) => const HomeScreen()),
+  (route) => false,
+);
+ 
     } else {
       // User is not logged in, navigate to Login Screen
       Navigator.pushReplacement(

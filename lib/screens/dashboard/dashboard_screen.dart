@@ -16,6 +16,7 @@ class DashboardScreen extends StatelessWidget {
       create: (context) => DashboardBloc()..add(LoadTasks()),
       child: Scaffold(
         appBar: AppBar(
+        automaticallyImplyLeading: false,
           title: const Text(
             "Dashboard",
             style: TextStyle(
